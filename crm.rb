@@ -73,17 +73,25 @@ end
     if contact==nil
       puts "No contact with that ID found."
     else
-    puts "Which attribute would you like to change? Enter a number:"
-    puts "[1] First Name"
-    puts "[2] Last Name"
-    puts "[3] Email"
-    puts "[4] Note"
-    contact_attribute=gets.chomp.to_i
+    puts "Please enter the new values for the contact. If you wish to leave a particular value as is, simply leave your input blank and press enter."
+    puts "First Name: #{contact.first_name}"
+    first_name = gets.chomp
+    puts "Last Name:"
+    last_name=gets.chomp
+    puts "Email:"
+    email=gets.chomp
+    puts "Note:"
+    note=gets.chomp
     
-    puts "Please enter the new value:"
-    new_value=gets.chomp
-    
-    contact.modify(contact_attribute, new_value)
+    if first_name ==""
+      first_name=contact.first_name
+    end
+
+    contact.update(
+      first_name: first_name,
+      last_name: last_name,
+      email: email,
+      note: note)
     end
 
   end
