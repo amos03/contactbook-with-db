@@ -123,17 +123,33 @@ end
   end
 
   def display_all_contacts
-    Contact.all
+    p Contact.all
   end
 
   def search_by_attribute
     puts "============================"
     puts "Search by attribute and value"
-    puts "Please enter the attribute (first name, last name, email, note) to search by:"
-    attribute = gets.chomp
-    puts "Please enter the value"
+    puts "Please enter a number for the attribute you wish to search by:"
+    puts "[1] First Name"
+    puts "[2] Last Name"
+    puts "[3] Email"
+    puts "[4] Note"
+    attribute_choice = gets.chomp.to_i
+    puts "Please enter the value:"
     value = gets.chomp
-    Contact.find_by(attribute, value)
+
+    case attribute_choice
+    when 1
+    contact = Contact.find_by(first_name: "#{value}")
+    when 2
+    contact = Contact.find_by(last_name: "#{value}")
+    when 3
+    contact =Contact.find_by(email: "#{value}")
+    when 4
+    contact =Contact.find_by(note: "#{value}")
+    end
+    
+    p contact
   end
 
 def delete_all
