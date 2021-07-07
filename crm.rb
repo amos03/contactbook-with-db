@@ -76,15 +76,27 @@ end
     puts "Please enter the new values for the contact. If you wish to leave a particular value as is, simply leave your input blank and press enter."
     puts "First Name: #{contact.first_name}"
     first_name = gets.chomp
-    puts "Last Name:"
+    puts "Last Name: #{contact.last_name}"
     last_name=gets.chomp
-    puts "Email:"
+    puts "Email: #{contact.email}"
     email=gets.chomp
-    puts "Note:"
+    puts "Note: #{contact.note}"
     note=gets.chomp
     
     if first_name ==""
       first_name=contact.first_name
+    end
+   
+    if last_name ==""
+      last_name=contact.last_name
+    end
+    
+    if email==""
+      email=contact.email
+    end
+
+    if note==""
+      note=contact.note
     end
 
     contact.update(
