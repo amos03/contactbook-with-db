@@ -152,6 +152,7 @@ end
     p contact
   end
 
+  #STILL NEED TO FIX THIS UP
 def delete_all
   puts "Are you sure you would like to delete all contacts? (y/n)"
   response=gets.chomp
