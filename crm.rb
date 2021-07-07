@@ -68,21 +68,80 @@ end
   def modify_existing_contact
     puts "Please enter the ID number of the contact you wish to modify:"
     id_number = gets.chomp.to_i
-    contact=Contact.find(id_number)
+    contact=Contact.find_by_id(id_number)
 
     if contact==nil
       puts "No contact with that ID found."
     else
-    puts "Please enter the new values for the contact. If you wish to leave a particular value as is, simply leave your input blank and press enter."
-    puts "First Name: #{contact.first_name}"
-    first_name = gets.chomp
-    puts "Last Name: #{contact.last_name}"
-    last_name=gets.chomp
-    puts "Email: #{contact.email}"
-    email=gets.chomp
-    puts "Note: #{contact.note}"
-    note=gets.chomp
+      puts "Which attribute of the contact would you like to change? Please enter"
+      puts "1 for First Name"
+      puts "2 for Last Name"
+      puts "3 for Email"
+      puts "4 for Note"
+      puts "5 to change all values"
+
+      user_choice = gets.chomp.to_i
+
+      case user_choice
+      
+      when 1
+        puts "First Name: #{contact.first_name}"
+        first_name = gets.chomp
+        if first_name ==""
+          first_name=contact.first_name
+        end
+        contact.first_name=first_name
+        contact.save
+      when 2
+        puts "Last Name: #{contact.last_name}"
+        last_name=gets.chomp
+
+        if last_name ==""
+          last_name=contact.last_name
+        end
     
+        contact.last_name=last_name
+        contact.save 
+
+      when 3
+        puts "Email: #{contact.email}"
+        email=gets.chomp
+
+        if email==""
+          email=contact.email
+        end
+    
+
+        contact.email=email
+        contact.save
+
+      when 4
+        puts "Note: #{contact.note}"
+        note=gets.chomp
+
+        if note==""
+          note=contact.note
+        end
+    
+
+        contact.note=note
+        contact.save
+
+      when 5
+        puts "Please enter the new values for the contact. If you wish to leave a particular value as is, simply leave your input blank and press enter."
+      
+        puts "First Name: #{contact.first_name}"
+        first_name = gets.chomp
+      
+        puts "Last Name: #{contact.last_name}"
+        last_name=gets.chomp
+        
+        puts "Email: #{contact.email}"
+        email=gets.chomp
+      
+        puts "Note: #{contact.note}"
+        note=gets.chomp
+      
     if first_name ==""
       first_name=contact.first_name
     end
@@ -104,7 +163,8 @@ end
       last_name: last_name,
       email: email,
       note: note)
-    end
+      end
+  end 
 
   end
 
@@ -112,7 +172,7 @@ end
   puts "Please enter the ID number of the contact you wish to delete:"
   id_number=gets.chomp.to_i
 
-  contact=Contact.find(id_number)
+  contact=Contact.find_by_id(id_number)
   
     if contact==nil
       puts "No contact with that ID found."
@@ -152,22 +212,21 @@ end
     p contact
   end
 
-  #STILL NEED TO FIX THIS UP
 def delete_all
   puts "Are you sure you would like to delete all contacts? (y/n)"
   response=gets.chomp
   if response == "y" || response == "Y"
-    Contact.delete_all
+    Contact.destroy_all
   else
     p "Delete All aborted"
   end
 end
 
-def find_by_id
-puts "Please enter the contact's ID number:"
-id_number=gets.chomp.to_i
-Contact.find(id_number)
-end
+# def find_by_id
+# puts "Please enter the contact's ID number:"
+# id_number=gets.chomp.to_i
+# Contact.find_by_id(id_number)
+# end
 
 
 
